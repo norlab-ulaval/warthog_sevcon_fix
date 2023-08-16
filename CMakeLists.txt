@@ -11,13 +11,17 @@ find_package(std_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
-add_executable(warthog_sevcon_fix_node src/warthog_sevcon_fix_node.cpp)
-ament_target_dependencies(warthog_sevcon_fix_node rclcpp std_msgs)    # CHANGE
-
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Float64Stamped.msg"
   DEPENDENCIES std_msgs
 )
+
+add_executable(warthog_sevcon_fix_node src/warthog_sevcon_fix_node.cpp)
+ament_target_dependencies(warthog_sevcon_fix_node rclcpp std_msgs)
+
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(warthog_sevcon_fix_node "${cpp_typesupport_target}")
+ament_export_dependencies(rosidl_default_runtime)
 
 install(TARGETS
   warthog_sevcon_fix_node
