@@ -35,10 +35,10 @@ public:
         std::bind(&WarthogSevconFixNode::right_current_callback, this, _1));
     left_current_pub_ =
         this->create_publisher<warthog_sevcon_fix::msg::Float64Stamped>(
-            "sevcon_current/left", 10);
+            "sevcon/battery_current/left", 10);
     right_current_pub_ =
         this->create_publisher<warthog_sevcon_fix::msg::Float64Stamped>(
-            "sevcon_current/right", 10);
+            "sevcon/battery_current/right", 10);
   }
 
 private:
